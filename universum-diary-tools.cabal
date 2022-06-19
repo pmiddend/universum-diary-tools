@@ -13,6 +13,7 @@ author:         Philipp Middendorf
 maintainer:     pmidden@mailbox.org
 copyright:      2022 Philipp Middendorf
 license:        BSD3
+license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
