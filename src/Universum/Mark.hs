@@ -13,6 +13,7 @@ module Universum.Mark
     _comment,
     markMetadata,
     comment,
+    grade,
     _MarkComment,
     _MarkRate,
     _MarkIdea,
@@ -75,6 +76,14 @@ comment' f x = case x of
 
 comment :: Fold Mark Text
 comment f mark = comment' f mark
+
+grade' :: forall f.Applicative f => (Int -> f Int) -> Mark -> f Mark
+grade' f x = case x of
+          MarkRate m grade'' -> MarkRate <$> pure m <*> f grade''
+          _ -> pure x
+
+grade :: Fold Mark Int
+grade f mark = grade' f mark
 
 markPrefix :: IsString s => s
 markPrefix = "ru.schustovd.diary.api."
