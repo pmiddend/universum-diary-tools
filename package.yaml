@@ -1,0 +1,43 @@
+name:                universum-diary-tools
+version:             1.0.0
+github:              "pmiddend/universal-diary-tools"
+license:             BSD3
+author:              "Philipp Middendorf"
+maintainer:          "pmidden@mailbox.org"
+copyright:           "2022 Philipp Middendorf"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/pmiddend/universal-diary-tools#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- aeson
+- lens
+- time
+- text
+
+library:
+  source-dirs: src
+
+executables:
+  universum-diary-tools-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - universum-diary-tools
+    - optparse-applicative
+    - Chart
+    - Chart-diagrams
