@@ -19,11 +19,15 @@ Say you made a backup of your Universum notes. This will be a `.zip` file. Extra
 To plot your mood over time, averaging over 30 days (it will be a moving average) use this command:
 
 ```
-stack run -- --input-file data.pr plot-mood --output-file mood.png --average-days 30
+stack run -- --input-file data.pr plot-mood --output-file mood.svg --average-days 30
 ```
 
 To plot the number of words typed over time, use this command:
 
 ```
-stack run -- --input-file data.pr plot-word-count --output-file word-count.png --average-days 30
+stack run -- --input-file data.pr plot-word-count --output-file word-count.svg --average-days 30
 ```
+
+The output of my word count so far, for example, is:
+
+![Word count graph](./images/word-count.svg)
