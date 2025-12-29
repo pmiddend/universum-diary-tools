@@ -3,14 +3,12 @@
 {-# LANGUAGE TemplateHaskell #-}
 
 module Universum.Mark
-  ( Mark,
+  ( Mark (..),
     markChanged,
     markCreated,
     markDate,
     markId,
     markTime,
-    _markMetadata,
-    _comment,
     markMetadata,
     comment,
     grade,
@@ -20,10 +18,11 @@ module Universum.Mark
     _MarkMoney,
     _MarkShape,
     _MarkPhoto,
+    MarkMetadata,
   )
 where
 
-import Control.Lens (makeLenses, makePrisms, to, Getter, Fold)
+import Control.Lens (Fold, Getter, makeLenses, makePrisms, to)
 import Data.Aeson
   ( FromJSON (..),
     Value (String),
@@ -66,26 +65,26 @@ makePrisms ''Mark
 markMetadata :: Getter Mark MarkMetadata
 markMetadata = to _markMetadata
 
-comment' :: forall f.Applicative f => (Text -> f Text) -> Mark -> f Mark
+comment' :: forall f. (Applicative f) => (Text -> f Text) -> Mark -> f Mark
 comment' f x = case x of
-          MarkComment m comment'' -> MarkComment <$> pure m <*> f comment''
-          MarkIdea m comment'' -> MarkIdea <$> pure m <*> f comment''
-          MarkMoney m money comment'' -> MarkMoney <$> pure m <*> pure money <*> f comment''
-          MarkPhoto m photo comment'' -> MarkPhoto <$> pure m <*> pure photo <*> f comment''
-          _ -> pure x
+  MarkComment m comment'' -> MarkComment <$> pure m <*> f comment''
+  MarkIdea m comment'' -> MarkIdea <$> pure m <*> f comment''
+  MarkMoney m money comment'' -> MarkMoney <$> pure m <*> pure money <*> f comment''
+  MarkPhoto m photo comment'' -> MarkPhoto <$> pure m <*> pure photo <*> f comment''
+  _ -> pure x
 
 comment :: Fold Mark Text
 comment f mark = comment' f mark
 
-grade' :: forall f.Applicative f => (Int -> f Int) -> Mark -> f Mark
+grade' :: forall f. (Applicative f) => (Int -> f Int) -> Mark -> f Mark
 grade' f x = case x of
-          MarkRate m grade'' -> MarkRate <$> pure m <*> f grade''
-          _ -> pure x
+  MarkRate m grade'' -> MarkRate <$> pure m <*> f grade''
+  _ -> pure x
 
 grade :: Fold Mark Int
 grade f mark = grade' f mark
 
-markPrefix :: IsString s => s
+markPrefix :: (IsString s) => s
 markPrefix = "ru.schustovd.diary.api."
 
 instance FromJSON Mark where
