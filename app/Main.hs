@@ -1,4 +1,4 @@
-module Main where
+module Main (main) where
 
 import Control.Lens (foldOf, sumOf, view, (.=), (^.))
 import Control.Monad (forM)
@@ -34,7 +34,8 @@ commandParser = OptParse.subparser (OptParse.command "plot-word-count" (info plo
 optionsParser :: OptParse.Parser Options
 optionsParser =
   Options
-    <$> commandParser <*> OptParse.strOption (OptParse.long "input-file" <> OptParse.help "data.pr input file")
+    <$> commandParser
+    <*> OptParse.strOption (OptParse.long "input-file" <> OptParse.help "data.pr input file")
 
 movingAverage :: Int -> ([a] -> f) -> [a] -> [f]
 movingAverage n f xs = evalState (forM xs $ \x -> modify ((x :) . take (n - 1)) >> gets f) []
