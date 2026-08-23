@@ -1,5 +1,7 @@
 # Universum diary tools
 
+**This repository has moved to [Codeberg](https://codeberg.org/pmiddend/universum-diary-tools)**
+
 [![Haskell CI](https://github.com/pmiddend/universum-diary-tools/actions/workflows/haskell.yml/badge.svg)](https://github.com/pmiddend/universum-diary-tools/actions/workflows/haskell.yml)
 
 This project contains Haskell tools to parse and output statistics for the now defunct [Universum](https://play.google.com/store/apps/details?id=ru.schustovd.diary&hl=de_CH&gl=CH) diary app.
